@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "strict": true,
+
+    "target": "esnext",
+    "module": "esnext",
+
+    "lib": [
+      "esnext",
+      "dom"
+    ],
+
+    "types": []
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "name": "@dnemoga/fetcher",
+  "version": "0.1.0",
+
+  "license": "MIT",
+
+  "author": {
+    "name": "Dmytro Nemoga",
+    "email": "dnemoga@gmail.com"
+  },
+
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:dnemoga/fetcher.git"
+  },
+
+  "files": [
+    "lib/*"
+  ],
+
+  "exports": {
+    ".": "./lib/fetcher.js"
+  },
+
+  "scripts": {
+    "build": "tsc --build tsconfig.build.json",
+    "build:watch": "npm run build -- --watch",
+
+    "serve": "npx http-server --proxy https://postman-echo.com ."
+  },
+
+  "devDependencies": {
+    "typescript": "4.7.3"
+  }
+}
