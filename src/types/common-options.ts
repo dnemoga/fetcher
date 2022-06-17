@@ -1,6 +1,7 @@
 export interface CommonOptions {
   mode?: Request['mode'];
-  cache?: Request['cache'];
-  referrerPolicy?: Request['referrerPolicy'];
   credentials?: Request['credentials'];
+  cache?: Request['cache'];
+  redirect?: Request['redirect'];
+  referrerPolicy?: Request['referrerPolicy'];
 }
