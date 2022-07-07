@@ -11,6 +11,6 @@ end_of_line = lf
 indent_style = space
 indent_size = 2
 
-# Before Save
+# On-save Actions
 trim_trailing_whitespace = true
 insert_final_newline = true

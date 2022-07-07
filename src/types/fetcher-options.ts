@@ -1,4 +1,4 @@
-export interface CommonOptions {
+export interface FetcherOptions {
   mode?: Request['mode'];
   credentials?: Request['credentials'];
   cache?: Request['cache'];
