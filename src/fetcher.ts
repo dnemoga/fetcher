@@ -1,13 +1,16 @@
 import { FetcherOptions } from './types/fetcher-options.js';
 import { RequestOptions } from './types/request-options.js';
 
+import { Interceptor } from './interceptor.js';
+
 import {
   toPayload,
   toUrl
 } from './helpers.js';
 
 export class Fetcher {
-  readonly interceptors: Set<(request: Request) => Request> = new Set();
+  readonly onRequest: Interceptor<Request> = new Interceptor();
+  readonly onResponse: Interceptor<Response> = new Interceptor();
 
   readonly #mode: Required<FetcherOptions>['mode'];
   readonly #credentials: Required<FetcherOptions>['credentials'];
@@ -50,26 +53,27 @@ export class Fetcher {
   async #request(method: string, baseUrl: string, options?: RequestOptions): Promise<Response> {
     const payload = toPayload(options?.data);
 
-    return fetch(
-      [...this.interceptors].reduce(
-        (request, interceptor) => interceptor(request),
+    // TODO: Replace with pipe operator when it's ready
+    return this.onResponse.intercept(
+      await fetch(
+        await this.onRequest.intercept(
+          new Request(
+            toUrl(baseUrl, options?.params),
 
-        new Request(
-          toUrl(baseUrl, options?.params),
-
-          {
-            method: method.toUpperCase(),
-            headers: { ...payload.headers, ...options?.headers },
-            body: payload.body,
-            mode: options?.mode ?? this.#mode,
-            credentials: options?.credentials ?? this.#credentials,
-            cache: options?.cache ?? this.#cache,
-            redirect: options?.redirect ?? this.#redirect,
-            referrerPolicy: options?.referrerPolicy ?? this.#referrerPolicy,
-            integrity: options?.integrity,
-            keepalive: options?.keepalive,
-            signal: options?.signal
-          }
+            {
+              method: method.toUpperCase(),
+              headers: { ...payload.headers, ...options?.headers },
+              body: payload.body,
+              mode: options?.mode ?? this.#mode,
+              credentials: options?.credentials ?? this.#credentials,
+              cache: options?.cache ?? this.#cache,
+              redirect: options?.redirect ?? this.#redirect,
+              referrerPolicy: options?.referrerPolicy ?? this.#referrerPolicy,
+              integrity: options?.integrity,
+              keepalive: options?.keepalive,
+              signal: options?.signal
+            }
+          )
         )
       )
     );

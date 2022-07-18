@@ -7,7 +7,7 @@ This library represents a minimalistic wrapper over the native [Fetch API](https
 npm i @dnemoga/fetch
 ```
 
-### Creating Fetcher Instance
+### Creating Instance
 ```ts
 import { Fetcher } from '@dnemoga/fetcher';
 
@@ -24,9 +24,9 @@ These options apply to every request outcoming from the current instance.
 - [`redirect`](https://developer.mozilla.org/en-US/docs/Web/API/Request/redirect) (default `follow`)
 - [`referrerPolicy`](https://developer.mozilla.org/en-US/docs/Web/API/Request/referrerPolicy) (default `strict-origin-when-cross-origin`)
 
-### Making Simple Request
+### Making Request
 ```ts
-const loadData = async () => {
+const getResource = async () => {
   const response = await fetcher.get('/resource', {
     // Options
   });
@@ -34,7 +34,7 @@ const loadData = async () => {
   console.log(response);
 };
 
-loadData();
+getResource();
 ```
 
 #### Request Options
@@ -48,7 +48,7 @@ loadData();
 ## Next Steps
 ### Interceptors
 ```ts
-fetcher.interceptors.add((request) => {
+fetcher.onRequest.use((request) => {
   request.headers.set('X-Foo', 'Foo');
   request.headers.set('X-Bar', 'Bar');
 
@@ -56,15 +56,34 @@ fetcher.interceptors.add((request) => {
 });
 ```
 
+### Error Handling
+```ts
+fetcher.onResponse.use((response) => {
+  if (!response.ok) {
+    throw new Error(response.statusText);
+  }
+
+  return response;
+});
+
+try {
+  fetcher.get('/status/400');
+} catch (error) {
+  console.error(error);
+}
+```
+
+| Reference: [Checking that the fetch was successful](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch#checking_that_the_fetch_was_successful)
+
 ### Request Timeout
 ```ts
 try {
-  const response = await fetcher.get('/resource', {
+  fetcher.get('/resource', {
     signal: AbortSignal.timeout(30000)
   });
-
-  console.log(response);
 } catch (error) {
-  console.error(error); // AbortError
+  console.error(error);
 }
 ```
+
+| Reference: [`AbortSignal.timeout()`](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal/timeout)
