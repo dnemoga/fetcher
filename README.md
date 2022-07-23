@@ -4,7 +4,7 @@ This library represents a minimalistic wrapper over the native [Fetch API](https
 ## Getting Started
 ### Installation
 ```sh
-npm i @dnemoga/fetch
+npm i @dnemoga/fetcher
 ```
 
 ### Creating Instance
@@ -73,7 +73,7 @@ try {
 }
 ```
 
-| Reference: [Checking that the fetch was successful](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch#checking_that_the_fetch_was_successful)
+| *Reference:* [Checking that the fetch was successful](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch#checking_that_the_fetch_was_successful)
 
 ### Request Timeout
 ```ts
@@ -86,4 +86,4 @@ try {
 }
 ```
 
-| Reference: [`AbortSignal.timeout()`](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal/timeout)
+| *Reference:* [`AbortSignal.timeout()`](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal/timeout)

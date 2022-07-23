@@ -1,26 +1,19 @@
 {
   "name": "@dnemoga/fetcher",
   "version": "0.2.0",
+  "description": "This library represents a minimalistic wrapper over the native Fetch API intended to use in web projects.",
 
   "license": "MIT",
 
-  "author": {
-    "name": "Dmytro Nemoga",
-    "email": "dnemoga@gmail.com"
-  },
-
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:dnemoga/fetcher.git"
-  },
+  "contributors": [
+    "Dmytro Nemoga <dnemoga@gmail.com>"
+  ],
 
   "files": [
     "lib/*"
   ],
 
-  "exports": {
-    ".": "./lib/fetcher.js"
-  },
+  "repository": "github:dnemoga/fetcher",
 
   "scripts": {
     "build": "tsc --build tsconfig.build.json",
@@ -31,5 +24,9 @@
 
   "devDependencies": {
     "typescript": "4.7.4"
+  },
+
+  "exports": {
+    ".": "./lib/fetcher.js"
   }
 }
