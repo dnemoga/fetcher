@@ -1,7 +1,15 @@
 {
   "name": "@dnemoga/fetcher",
   "version": "0.2.0",
-  "description": "This library represents a minimalistic wrapper over the native Fetch API intended to use in web projects.",
+  "description": "A minimalistic library built around the native Fetch API with zero dependencies. Intended to use only in modern web browsers.",
+
+  "keywords": [
+    "http-client",
+    "fetch",
+    "promise",
+    "typescript",
+    "javascript"
+  ],
 
   "license": "MIT",
 
@@ -18,8 +26,7 @@
   "scripts": {
     "build": "tsc --build tsconfig.build.json",
     "build:watch": "npm run build -- --watch",
-
-    "serve": "npx http-server --proxy https://postman-echo.com ."
+    "build:clean": "npm run build -- --clean"
   },
 
   "devDependencies": {

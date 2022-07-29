@@ -1,7 +1,5 @@
 {
   "compilerOptions": {
-    "strict": true,
-
     "target": "esnext",
     "module": "esnext",
 
@@ -10,6 +8,6 @@
       "dom"
     ],
 
-    "types": []
+    "strict": true
   }
 }

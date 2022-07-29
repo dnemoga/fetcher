@@ -1,10 +1,10 @@
 # @dnemoga/fetcher
-This library represents a minimalistic wrapper over the native [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) intended to use in web projects.
+A minimalistic library built around the native [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) with zero dependencies. Intended to use only in modern web browsers.
 
 ## Getting Started
 ### Installation
 ```sh
-npm i @dnemoga/fetcher
+npm install @dnemoga/fetcher
 ```
 
 ### Creating Instance
@@ -38,17 +38,28 @@ getResource();
 ```
 
 #### Request Options
-- `data`
-- `params`
-- `headers`
-- `integrity`
-- `keepalive`
-- `signal`
+- `data`\
+Any [body](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch#body) that you want to add to your request. Note that a request using the `GET` or `HEAD` method cannot have a body.
+
+- `params`\
+An object literal with string values which will be serialized into a query string.
+
+- `headers`\
+Any headers you want to add to your request, contained within an object literal with string values. Note that [some names are forbidden](https://developer.mozilla.org/en-US/docs/Glossary/Forbidden_header_name).
+
+- `integrity`\
+Contains the [subresource integrity](https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity) value of the request.
+
+- `keepalive`\
+The `keepalive` option can be used to allow the request to outlive the page. Fetch with the `keepalive` flag is a replacement for the [`Navigator.sendBeacon()`](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/sendBeacon) API.
+
+- `signal`\
+An [`AbortSignal`](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal) object instance; allows you to communicate with a fetch request and abort it if desired via an [`AbortController`](https://developer.mozilla.org/en-US/docs/Web/API/AbortController).
 
 ## Next Steps
 ### Interceptors
 ```ts
-fetcher.onRequest.use((request) => {
+fetcher.onRequest.use(async (request) => {
   request.headers.set('X-Foo', 'Foo');
   request.headers.set('X-Bar', 'Bar');
 
@@ -58,7 +69,7 @@ fetcher.onRequest.use((request) => {
 
 ### Error Handling
 ```ts
-fetcher.onResponse.use((response) => {
+fetcher.onResponse.use(async (response) => {
   if (!response.ok) {
     throw new Error(response.statusText);
   }

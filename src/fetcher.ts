@@ -64,11 +64,13 @@ export class Fetcher {
               method: method.toUpperCase(),
               headers: { ...payload.headers, ...options?.headers },
               body: payload.body,
+
               mode: options?.mode ?? this.#mode,
               credentials: options?.credentials ?? this.#credentials,
               cache: options?.cache ?? this.#cache,
               redirect: options?.redirect ?? this.#redirect,
               referrerPolicy: options?.referrerPolicy ?? this.#referrerPolicy,
+
               integrity: options?.integrity,
               keepalive: options?.keepalive,
               signal: options?.signal
