@@ -28,7 +28,7 @@ export function toPayload(data: unknown): Pick<RequestInit, 'headers' | 'body'> 
   };
 }
 
-export function toUrl(baseUrl: string, params: Record<string, string> = {}): URL {
+export function toUrl(baseUrl: string, params: Record<string, string>): URL {
   const url = new URL(baseUrl, location.origin);
 
   Object.entries(params).forEach(([name, value]) => {

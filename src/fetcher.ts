@@ -58,7 +58,7 @@ export class Fetcher {
       await fetch(
         await this.onRequest.intercept(
           new Request(
-            toUrl(baseUrl, options?.params),
+            toUrl(baseUrl, options?.params ?? {}),
 
             {
               method: method.toUpperCase(),

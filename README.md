@@ -1,4 +1,7 @@
 # @dnemoga/fetcher
+![](https://img.shields.io/github/package-json/v/dnemoga/fetcher/main?style=flat-square)
+![](https://img.shields.io/github/workflow/status/dnemoga/fetcher/quality-gateway/main?style=flat-square)
+
 A minimalistic library built around the native [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) with zero dependencies. Intended to use only in modern web browsers.
 
 ## Getting Started

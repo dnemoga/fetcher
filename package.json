@@ -1,6 +1,6 @@
 {
   "name": "@dnemoga/fetcher",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A minimalistic library built around the native Fetch API with zero dependencies. Intended to use only in modern web browsers.",
 
   "keywords": [
@@ -26,7 +26,8 @@
     "build:watch": "npm run build -- --watch",
     "build:clean": "npm run build -- --clean",
 
-    "lint": "eslint src"
+    "lint": "eslint src/**/*.ts",
+    "lint:fix": "npm run lint -- --fix"
   },
 
   "devDependencies": {
