@@ -37,12 +37,14 @@ const getResource = async () => {
 getResource();
 ```
 
+| Note: Supported methods are `get`, `head`, `post`, `put`, `patch`, and `delete`.
+
 #### Request Options
 - `data`\
 Any [body](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch#body) that you want to add to your request. Note that a request using the `GET` or `HEAD` method cannot have a body.
 
 - `params`\
-An object literal with string values which will be serialized into a query string.
+Any search parameters you want to add to your request, contained within an object literal with string values.
 
 - `headers`\
 Any headers you want to add to your request, contained within an object literal with string values. Note that [some names are forbidden](https://developer.mozilla.org/en-US/docs/Glossary/Forbidden_header_name).
@@ -59,13 +61,22 @@ An [`AbortSignal`](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal)
 ## Next Steps
 ### Interceptors
 ```ts
-fetcher.onRequest.use(async (request) => {
+const setCustomHeaders = async (request) => {
   request.headers.set('X-Foo', 'Foo');
   request.headers.set('X-Bar', 'Bar');
 
   return request;
-});
+};
+
+fetcher.onRequest.use(setCustomHeaders);
 ```
+
+Also, you're able to remove the existing interceptor when needed.
+```ts
+fetcher.onRequest.eject(setCustomHeaders);
+```
+
+| Note: Interceptors are called in the order they were added.
 
 ### Error Handling
 ```ts
@@ -78,23 +89,19 @@ fetcher.onResponse.use(async (response) => {
 });
 
 try {
-  fetcher.get('/status/400');
+  await fetcher.get('/status/400');
 } catch (error) {
   console.error(error);
 }
 ```
 
-| *Reference:* [Checking that the fetch was successful](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch#checking_that_the_fetch_was_successful)
+| Source: [Checking that the fetch was successful](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch#checking_that_the_fetch_was_successful)
 
 ### Request Timeout
 ```ts
-try {
-  fetcher.get('/resource', {
-    signal: AbortSignal.timeout(30000)
-  });
-} catch (error) {
-  console.error(error);
-}
+fetcher.get('/resource', {
+  signal: AbortSignal.timeout(30000)
+});
 ```
 
-| *Reference:* [`AbortSignal.timeout()`](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal/timeout)
+| Source: [`AbortSignal.timeout()`](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal/timeout)

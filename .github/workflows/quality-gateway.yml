@@ -1,0 +1,15 @@
+name: quality-gateway
+
+on: push
+
+jobs:
+  build:
+    uses: ./.github/workflows/npm-script-runner.yml
+    with:
+      npm-script: build
+
+  lint:
+    needs: [build]
+    uses: ./.github/workflows/npm-script-runner.yml
+    with:
+      npm-script: lint

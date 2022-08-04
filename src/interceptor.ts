@@ -1,15 +1,13 @@
-export interface InterceptorHandler<T> {
-  (target: T): Promise<T>;
-}
+export type Handler<T> = (target: T) => Promise<T>;
 
 export class Interceptor<T> {
-  readonly #handlers: Set<InterceptorHandler<T>> = new Set();
+  readonly #handlers = new Set<Handler<T>>();
 
-  use(handler: InterceptorHandler<T>): void {
+  use(handler: Handler<T>): void {
     this.#handlers.add(handler);
   }
 
-  eject(handler: InterceptorHandler<T>): void {
+  eject(handler: Handler<T>): void {
     this.#handlers.delete(handler);
   }
 

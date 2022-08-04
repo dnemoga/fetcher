@@ -9,8 +9,8 @@ import {
 } from './helpers.js';
 
 export class Fetcher {
-  readonly onRequest: Interceptor<Request> = new Interceptor();
-  readonly onResponse: Interceptor<Response> = new Interceptor();
+  readonly onRequest = new Interceptor<Request>();
+  readonly onResponse = new Interceptor<Response>();
 
   readonly #mode: Required<FetcherOptions>['mode'];
   readonly #credentials: Required<FetcherOptions>['credentials'];
