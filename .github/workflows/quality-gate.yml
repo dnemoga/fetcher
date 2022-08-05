@@ -1,0 +1,39 @@
+name: Quality Gate
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  security-events: write
+
+jobs:
+  static-code-analysis:
+    name: Static Code Analysis
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: lts/*
+          cache: npm
+      - run: npm ci
+      - run: npm run lint:ci
+        continue-on-error: true
+      - uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: lint-report.sarif
+          wait-for-processing: true
+
+  semantic-code-analysis:
+    name: Semantic Code Analysis
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: github/codeql-action/init@v2
+        with:
+          languages: javascript
+          queries: security-and-quality
+      - uses: github/codeql-action/analyze@v2

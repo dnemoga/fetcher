@@ -1,3 +1,5 @@
+import { RequestOptions } from './types/request-options.js';
+
 import {
   isReadableStream,
   isBlob,
@@ -9,7 +11,7 @@ import {
   isUndefined
 } from './utils.js';
 
-export function toPayload(data: unknown): Pick<RequestInit, 'headers' | 'body'> {
+export function toPayload(data: Required<RequestOptions>['data']): Pick<RequestInit, 'headers' | 'body'> {
   if (isReadableStream(data)) return { body: data };
   if (isBlob(data)) return { body: data };
   if (isBufferSource(data)) return { body: data };
@@ -28,7 +30,7 @@ export function toPayload(data: unknown): Pick<RequestInit, 'headers' | 'body'> 
   };
 }
 
-export function toUrl(baseUrl: string, params: Record<string, string>): URL {
+export function toUrl(baseUrl: string, params: Required<RequestOptions>['params']): URL {
   const url = new URL(baseUrl, location.origin);
 
   Object.entries(params).forEach(([name, value]) => {

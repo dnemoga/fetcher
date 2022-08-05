@@ -21,23 +21,24 @@
     "lib/*"
   ],
 
+  "exports": {
+    ".": "./lib/fetcher.js"
+  },
+
   "scripts": {
     "build": "tsc --build tsconfig.build.json",
     "build:watch": "npm run build -- --watch",
     "build:clean": "npm run build -- --clean",
 
-    "lint": "eslint src/**/*.ts",
-    "lint:fix": "npm run lint -- --fix"
+    "lint": "eslint src",
+    "lint:ci": "npm run lint -- --format @microsoft/eslint-formatter-sarif --output-file lint-report.sarif"
   },
 
   "devDependencies": {
+    "@microsoft/eslint-formatter-sarif": "3.0.0",
     "@typescript-eslint/eslint-plugin": "5.32.0",
     "@typescript-eslint/parser": "5.32.0",
     "eslint": "8.21.0",
     "typescript": "4.7.4"
-  },
-
-  "exports": {
-    ".": "./lib/fetcher.js"
   }
 }
