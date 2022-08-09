@@ -1,0 +1,38 @@
+name: Release Pipeline
+
+on:
+  push:
+    tags:
+      - v1.*
+
+permissions:
+  contents: read
+  security-events: write
+
+jobs:
+  build-pipeline:
+    name: Build Pipeline
+    uses: ./.github/workflows/build-pipeline.yml
+
+  quality-gate:
+    name: Quality Gate
+    uses: ./.github/workflows/quality-gate.yml
+
+  publishing:
+    name: Publishing
+    runs-on: ubuntu-latest
+    needs:
+      - build-pipeline
+      - quality-gate
+    steps:
+      - uses: actions/download-artifact@v3
+        with:
+          name: npm-package
+      - uses: actions/setup-node@v3
+        with:
+          node-version: lts/*
+          registry-url: https://registry.npmjs.org
+          cache: npm
+      - run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
