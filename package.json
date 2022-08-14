@@ -31,14 +31,14 @@
     "build:clean": "npm run build -- --clean",
 
     "lint": "eslint src",
-    "lint:ci": "npm run lint -- --format @microsoft/eslint-formatter-sarif --output-file lint-report.sarif"
+    "lint:ci": "npm run lint -- --format @microsoft/eslint-formatter-sarif --output-file results/lint.sarif"
   },
 
   "devDependencies": {
     "@microsoft/eslint-formatter-sarif": "3.0.0",
     "@typescript-eslint/eslint-plugin": "5.33.0",
     "@typescript-eslint/parser": "5.33.0",
-    "eslint": "8.21.0",
+    "eslint": "8.22.0",
     "typescript": "4.7.4"
   }
 }
