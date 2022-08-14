@@ -1,12 +1,12 @@
-import { FetcherOptions } from './types/fetcher-options.js';
-import { RequestOptions } from './types/request-options.js';
+import { FetcherOptions } from './types/fetcher-options';
+import { RequestOptions } from './types/request-options';
 
-import { Interceptor } from './interceptor.js';
+import { Interceptor } from './interceptor';
 
 import {
   toPayload,
   toUrl
-} from './helpers.js';
+} from './helpers';
 
 export class Fetcher {
   readonly onRequest = new Interceptor<Request>();

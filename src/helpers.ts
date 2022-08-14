@@ -1,4 +1,4 @@
-import { RequestOptions } from './types/request-options.js';
+import { RequestOptions } from './types/request-options';
 
 import {
   isReadableStream,
@@ -9,7 +9,7 @@ import {
   isString,
   isNull,
   isUndefined
-} from './utils.js';
+} from './utils';
 
 export function toPayload(data: Required<RequestOptions>['data']): Pick<RequestInit, 'headers' | 'body'> {
   if (isReadableStream(data)) return { body: data };
