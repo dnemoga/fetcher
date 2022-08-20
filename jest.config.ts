@@ -9,7 +9,13 @@ const config: Config = {
     }
   },
 
-  collectCoverage: true
+  collectCoverage: true,
+
+  coverageReporters: [
+    'lcov'
+  ],
+
+  coverageProvider: 'v8'
 };
 
 export default config;
