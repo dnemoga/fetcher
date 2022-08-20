@@ -1,11 +1,17 @@
-# Build output
+/.*/
+!/.github/
+
+# Build Output
 /lib/
 
-# Dependency directories
+# Test Output
+/coverage/
+
+# Dependencies Directory
 node_modules/
 
-# TypeScript cache
+# TypeScript Cache
 *.tsbuildinfo
 
-# Report files
+# Report Files
 *.sarif

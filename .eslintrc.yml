@@ -12,3 +12,10 @@ extends:
   - plugin:@typescript-eslint/recommended
   - plugin:@typescript-eslint/recommended-requiring-type-checking
   - plugin:@typescript-eslint/strict
+
+rules:
+  '@typescript-eslint/explicit-function-return-type':
+    - error
+  '@typescript-eslint/explicit-member-accessibility':
+    - error
+    - accessibility: no-public

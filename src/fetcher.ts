@@ -18,6 +18,26 @@ export class Fetcher {
   readonly #redirect: Required<FetcherOptions>['redirect'];
   readonly #referrerPolicy: Required<FetcherOptions>['referrerPolicy'];
 
+  get mode(): Required<FetcherOptions>['mode'] {
+    return this.#mode;
+  }
+
+  get credentials(): Required<FetcherOptions>['credentials'] {
+    return this.#credentials;
+  }
+
+  get cache(): Required<FetcherOptions>['cache'] {
+    return this.#cache;
+  }
+
+  get redirect(): Required<FetcherOptions>['redirect'] {
+    return this.#redirect;
+  }
+
+  get referrerPolicy(): Required<FetcherOptions>['referrerPolicy'] {
+    return this.#referrerPolicy;
+  }
+
   constructor(options?: FetcherOptions) {
     this.#mode = options?.mode ?? 'cors';
     this.#credentials = options?.credentials ?? 'same-origin';

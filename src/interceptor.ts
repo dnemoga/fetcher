@@ -3,6 +3,10 @@ export type Handler<T> = (target: T) => Promise<T>;
 export class Interceptor<T> {
   readonly #handlers = new Set<Handler<T>>();
 
+  get handlers(): Set<Handler<T>> {
+    return this.#handlers;
+  }
+
   use(handler: Handler<T>): void {
     this.#handlers.add(handler);
   }

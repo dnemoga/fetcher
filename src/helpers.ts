@@ -30,12 +30,12 @@ export function toPayload(data: Required<RequestOptions>['data']): Pick<RequestI
   };
 }
 
-export function toUrl(baseUrl: string, params: Required<RequestOptions>['params']): URL {
+export function toUrl(baseUrl: string, params: Required<RequestOptions>['params']): string {
   const url = new URL(baseUrl, location.origin);
 
   Object.entries(params).forEach(([name, value]) => {
     url.searchParams.append(name, value);
   });
 
-  return url;
+  return String(url);
 }
