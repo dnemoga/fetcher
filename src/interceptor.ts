@@ -16,8 +16,8 @@ export class Interceptor<T> {
   }
 
   async intercept(target: T): Promise<T> {
-    for await (const handler of this.#handlers) {
-      target = await handler(target);
+    for await (const next of this.#handlers) {
+      target = await next(target);
     }
 
     return target;

@@ -1,6 +1,6 @@
-import { Config } from 'jest';
+import type { Config } from 'jest';
 
-const config: Config = {
+export default {
   preset: 'ts-jest',
 
   globals: {
@@ -16,6 +16,4 @@ const config: Config = {
   ],
 
   coverageProvider: 'v8'
-};
-
-export default config;
+} as Config;

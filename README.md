@@ -1,7 +1,7 @@
 # @dnemoga/fetcher
 [![](https://img.shields.io/github/workflow/status/dnemoga/fetcher/Build%20Pipeline?label=Build%20Pipeline&style=flat-square)](https://github.com/dnemoga/fetcher/actions/workflows/build-pipeline.yml)
 [![](https://img.shields.io/github/workflow/status/dnemoga/fetcher/Quality%20Gate?label=Quality%20Gate&style=flat-square)](https://github.com/dnemoga/fetcher/actions/workflows/quality-gate.yml)
-[![](https://img.shields.io/codecov/c/github/dnemoga/fetcher?label=Test%20Coverage&style=flat-square)](https://app.codecov.io/gh/dnemoga/fetcher)
+[![](https://img.shields.io/codecov/c/github/dnemoga/fetcher?label=Code%20Coverage&style=flat-square)](https://app.codecov.io/gh/dnemoga/fetcher)
 
 A minimalistic library built around the native [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) with zero dependencies. Intended to use only in modern web browsers.
 
