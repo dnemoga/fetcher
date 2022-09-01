@@ -1,4 +1,4 @@
-import { Interceptor } from '../interceptor';
+import { Interceptor } from '../interceptor.js';
 
 describe('Interceptor', () => {
   let interceptor: Interceptor<number>;

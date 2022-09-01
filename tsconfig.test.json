@@ -2,6 +2,8 @@
   "extends": "./tsconfig",
 
   "compilerOptions": {
+    "rootDir": "src",
+
     "types": [
       "jest"
     ],

@@ -22,7 +22,7 @@
   ],
 
   "scripts": {
-    "build": "tsc --project tsconfig.src.json --rootDir src --outDir lib --declaration",
+    "build": "tsc --project tsconfig.build.json --outDir lib",
     "build:watch": "npm run build -- --watch",
 
     "lint": "eslint src",

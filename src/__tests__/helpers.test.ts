@@ -1,7 +1,7 @@
 import {
   toPayload,
   // toUrl
-} from '../helpers';
+} from '../helpers.js';
 
 // Mocks
 import 'environment';

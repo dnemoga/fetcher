@@ -7,7 +7,7 @@ import {
   isString,
   isNull,
   isUndefined
-} from '../utils';
+} from '../utils.js';
 
 // Mocks
 import 'environment';

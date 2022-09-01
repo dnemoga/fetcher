@@ -1,4 +1,4 @@
-import { FetcherOptions } from './fetcher-options';
+import { FetcherOptions } from './fetcher-options.js';
 
 export interface RequestOptions extends FetcherOptions {
   /**

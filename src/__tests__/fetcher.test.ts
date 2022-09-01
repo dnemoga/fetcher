@@ -1,5 +1,5 @@
-import { Fetcher } from '../fetcher';
-import { Interceptor } from '../interceptor';
+import { Fetcher } from '../fetcher.js';
+import { Interceptor } from '../interceptor.js';
 
 describe('Fetcher', () => {
   let fetcher: Fetcher;
