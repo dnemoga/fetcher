@@ -78,4 +78,18 @@ describe('toPayload(data)', () => {
       expect(toPayload(data)).toStrictEqual({ body: data });
     });
   });
+
+  describe('when the data is another type', () => {
+    const data = { foo: 'bar' };
+
+    it('returns body as JSON string and adds `Content-Type` header', () => {
+      expect(toPayload(data)).toStrictEqual({
+        headers: {
+          'Content-Type': 'application/json;charset=UTF-8'
+        },
+
+        body: JSON.stringify(data)
+      });
+    });
+  });
 });
