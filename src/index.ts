@@ -1,4 +1,4 @@
-export * from './types/fetcher-options';
-export * from './types/request-options';
+export * from './types/fetcher-options.js';
+export * from './types/request-options.js';
 
-export * from './fetcher';
+export * from './fetcher.js';
