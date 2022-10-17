@@ -35,7 +35,7 @@
   "devDependencies": {
     "@microsoft/eslint-formatter-sarif": "3.0.0",
     "@types/jest": "28.1.7",
-    "@typescript-eslint/eslint-plugin": "5.36.1",
+    "@typescript-eslint/eslint-plugin": "5.40.0",
     "@typescript-eslint/parser": "5.36.1",
     "eslint": "8.23.0",
     "jest": "28.1.3",
