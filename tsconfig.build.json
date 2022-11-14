@@ -2,6 +2,9 @@
   "extends": "./tsconfig.src",
 
   "compilerOptions": {
-    "declaration": true
+    "outDir": "lib",
+
+    "declaration": true,
+    "declarationMap": true
   }
 }

@@ -1,12 +1,8 @@
 import type { Config } from 'jest';
 
 export default {
-  preset: 'ts-jest/presets/default-esm',
-
-  globals: {
-    'ts-jest': {
-      tsconfig: 'tsconfig.test.json'
-    }
+  transform: {
+    '\\.ts$': ['ts-jest', { tsconfig: 'tsconfig.test.json' }]
   },
 
   moduleNameMapper: {
@@ -15,9 +11,6 @@ export default {
 
   collectCoverage: true,
 
-  coverageReporters: [
-    'lcov'
-  ],
-
-  coverageProvider: 'v8'
+  coverageProvider: 'v8',
+  coverageReporters: ['lcov']
 } as Config;

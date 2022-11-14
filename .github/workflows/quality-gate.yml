@@ -26,7 +26,7 @@ jobs:
         continue-on-error: true
       - uses: github/codeql-action/upload-sarif@v2
         with:
-          sarif_file: results/lint.sarif
+          sarif_file: lint.sarif
           wait-for-processing: true
 
   semantic-code-analysis:
