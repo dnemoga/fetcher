@@ -1,6 +1,6 @@
 {
   "name": "@dnemoga/fetcher",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "A minimalistic library built around the native Fetch API with zero dependencies. Intended to use only in modern web browsers.",
 
   "type": "module",
