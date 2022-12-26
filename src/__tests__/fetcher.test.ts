@@ -1,6 +1,9 @@
 import { Fetcher } from '../fetcher.js';
 import { Interceptor } from '../interceptor.js';
 
+// Mocks
+import 'environment';
+
 describe('Fetcher', () => {
   let fetcher: Fetcher;
 

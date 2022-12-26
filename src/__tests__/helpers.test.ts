@@ -1,6 +1,6 @@
 import {
   toPayload,
-  // toUrl
+  toUrl
 } from '../helpers.js';
 
 // Mocks
@@ -91,5 +91,11 @@ describe('toPayload(data)', () => {
         body: JSON.stringify(data)
       });
     });
+  });
+});
+
+describe('toUrl(baseUrl, params)', () => {
+  it('returns composed URL string', () => {
+    expect(toUrl('path', { foo: 'bar' })).toBe('http://localhost/path?foo=bar');
   });
 });

@@ -1,5 +1,8 @@
 import { Interceptor } from '../interceptor.js';
 
+// Mocks
+import 'environment';
+
 describe('Interceptor', () => {
   let interceptor: Interceptor<number>;
 
