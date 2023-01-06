@@ -13,89 +13,125 @@ import {
 import 'environment';
 
 describe('isReadableStream(value)', () => {
-  describe('when the value is an instance of ReadableStream', () => {
+  describe('when `value` is an instance of ReadableStream', () => {
+    // Parameters
     const value = new ReadableStream();
 
+    // Subject
+    const result = isReadableStream(value);
+
     it('returns `true`', () => {
-      expect(isReadableStream(value)).toBe(true);
+      expect(result).toBe(true);
     });
   });
 });
 
 describe('isBlob(value)', () => {
-  describe('when the value is an instance of Blob', () => {
+  describe('when `value` is an instance of Blob', () => {
+    // Parameters
     const value = new Blob();
 
+    // Subject
+    const result = isBlob(value);
+
     it('returns `true`', () => {
-      expect(isBlob(value)).toBe(true);
+      expect(result).toBe(true);
     });
   });
 });
 
 describe('isBufferSource(value)', () => {
-  describe('when the value is an instance of ArrayBuffer', () => {
+  describe('when `value` is an instance of ArrayBuffer', () => {
+    // Parameters
     const value = new ArrayBuffer(0);
 
+    // Subject
+    const result = isBufferSource(value);
+
     it('returns `true`', () => {
-      expect(isBufferSource(value)).toBe(true);
+      expect(result).toBe(true);
     });
   });
 
-  describe('when the value is an instance of DataView', () => {
+  describe('when `value` is an instance of DataView', () => {
+    // Parameters
     const value = new DataView(new ArrayBuffer(0));
 
+    // Subject
+    const result = isBufferSource(value);
+
     it('returns `true`', () => {
-      expect(isBufferSource(value)).toBe(true);
+      expect(result).toBe(true);
     });
   });
 });
 
 describe('isFormData(value)', () => {
-  describe('when the value is an instance of FormData', () => {
+  describe('when `value` is an instance of FormData', () => {
+    // Parameters
     const value = new FormData();
 
+    // Subject
+    const result = isFormData(value);
+
     it('returns `true`', () => {
-      expect(isFormData(value)).toBe(true);
+      expect(result).toBe(true);
     });
   });
 });
 
 describe('isURLSearchParams(value)', () => {
-  describe('when the value is an instance of URLSearchParams', () => {
+  describe('when `value` is an instance of URLSearchParams', () => {
+    // Parameters
     const value = new URLSearchParams();
 
+    // Subject
+    const result = isURLSearchParams(value);
+
     it('returns `true`', () => {
-      expect(isURLSearchParams(value)).toBe(true);
+      expect(result).toBe(true);
     });
   });
 });
 
 describe('isString(value)', () => {
-  describe('when the value is a string', () => {
+  describe('when `value` is a string', () => {
+    // Parameters
     const value = 'text';
 
+    // Subject
+    const result = isString(value);
+
     it('returns `true`', () => {
-      expect(isString(value)).toBe(true);
+      expect(result).toBe(true);
     });
   });
 });
 
 describe('isNull(value)', () => {
-  describe('when the value is null', () => {
+  describe('when `value` is null', () => {
+    // Parameters
     const value = null;
 
+    // Subject
+    const result = isNull(value);
+
     it('returns `true`', () => {
-      expect(isNull(value)).toBe(true);
+      expect(result).toBe(true);
     });
   });
 });
 
 describe('isUndefined(value)', () => {
-  describe('when the value is undefined', () => {
+  describe('when `value` is undefined', () => {
+    // Parameters
     const value = undefined;
 
+    // Subject
+    const result = isUndefined(value);
+
     it('returns `true`', () => {
-      expect(isUndefined(value)).toBe(true);
+      expect(result).toBe(true);
     });
   });
 });

@@ -1,4 +1,4 @@
-export type Handler<T> = (target: T) => Promise<T>;
+export type Handler<T> = (value: T) => Promise<T>;
 
 export class Interceptor<T> {
   readonly #handlers = new Set<Handler<T>>();
@@ -15,11 +15,11 @@ export class Interceptor<T> {
     this.#handlers.delete(handler);
   }
 
-  async intercept(target: T): Promise<T> {
+  async intercept(value: T): Promise<T> {
     for await (const next of this.#handlers) {
-      target = await next(target);
+      value = await next(value);
     }
 
-    return target;
+    return value;
   }
 }
