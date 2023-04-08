@@ -1,6 +1,6 @@
 {
   "name": "@dnemoga/fetcher",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "description": "A minimalistic library built around the native Fetch API with zero dependencies. Intended to use only in modern web browsers.",
 
   "type": "module",
@@ -41,14 +41,14 @@
 
   "devDependencies": {
     "@microsoft/eslint-formatter-sarif": "3.0.0",
-    "@types/jest": "29.2.5",
-    "@typescript-eslint/eslint-plugin": "5.48.0",
-    "@typescript-eslint/parser": "5.48.0",
-    "eslint": "8.31.0",
-    "jest": "29.3.1",
-    "ts-jest": "29.0.3",
+    "@types/jest": "29.5.0",
+    "@typescript-eslint/eslint-plugin": "5.57.1",
+    "@typescript-eslint/parser": "5.57.1",
+    "eslint": "8.38.0",
+    "jest": "29.5.0",
+    "ts-jest": "29.1.0",
     "ts-node": "10.9.1",
-    "typescript": "4.9.4"
+    "typescript": "5.0.4"
   },
 
   "engines": {

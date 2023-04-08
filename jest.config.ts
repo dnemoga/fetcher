@@ -1,4 +1,4 @@
-import type { Config } from 'jest';
+import { Config } from 'jest';
 
 export default {
   transform: {
@@ -11,6 +11,7 @@ export default {
 
   collectCoverage: true,
 
-  coverageProvider: 'v8',
-  coverageReporters: ['lcov']
+  coverageReporters: [
+    'lcov'
+  ]
 } as Config;
