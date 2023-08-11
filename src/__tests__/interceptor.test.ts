@@ -13,7 +13,7 @@ describe('Interceptor()', () => {
   });
 
   describe('.use(handler)', () => {
-    // Setup
+    // Parameters
     const clone = jest.fn<Promise<number[]>, [value: number[]]>(
       (value) => Promise.resolve([...value])
     );
@@ -34,11 +34,12 @@ describe('Interceptor()', () => {
   });
 
   describe('.eject(handler)', () => {
-    // Setup
+    // Parameters
     const clone = jest.fn<Promise<number[]>, [value: number[]]>(
       (value) => Promise.resolve([...value])
     );
 
+    // Setup
     beforeAll(() => {
       interceptor.use(clone);
     });
@@ -54,7 +55,7 @@ describe('Interceptor()', () => {
   });
 
   describe('.intercept(value)', () => {
-    // Setup
+    // Parameters
     const sort = jest.fn<Promise<number[]>, [value: number[]]>(
       (value) => Promise.resolve([...value].sort())
     );
@@ -63,6 +64,7 @@ describe('Interceptor()', () => {
       (value) => Promise.resolve([...value].reverse())
     );
 
+    // Setup
     beforeAll(() => {
       interceptor.use(sort);
       interceptor.use(reverse);

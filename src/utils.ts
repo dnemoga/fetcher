@@ -7,7 +7,7 @@ export function isBlob(value: unknown): value is Blob {
 }
 
 export function isBufferSource(value: unknown): value is BufferSource {
-  return value instanceof ArrayBuffer || ArrayBuffer.isView(value);
+  return ArrayBuffer.isView(value) || value instanceof ArrayBuffer;
 }
 
 export function isFormData(value: unknown): value is FormData {

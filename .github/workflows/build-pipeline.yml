@@ -27,6 +27,6 @@ jobs:
           name: npm-package
           path: |
             lib/**
-            package.json
-            README.md
             LICENSE
+            README.md
+            package.json

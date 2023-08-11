@@ -41,9 +41,9 @@ describe('isBlob(value)', () => {
 });
 
 describe('isBufferSource(value)', () => {
-  describe('when `value` is an instance of ArrayBuffer', () => {
+  describe('when `value` is an instance of ArrayBufferView', () => {
     // Parameters
-    const value = new ArrayBuffer(0);
+    const value = new DataView(new ArrayBuffer(0));
 
     // Subject
     const result = isBufferSource(value);
@@ -53,9 +53,9 @@ describe('isBufferSource(value)', () => {
     });
   });
 
-  describe('when `value` is an instance of DataView', () => {
+  describe('when `value` is an instance of ArrayBuffer', () => {
     // Parameters
-    const value = new DataView(new ArrayBuffer(0));
+    const value = new ArrayBuffer(0);
 
     // Subject
     const result = isBufferSource(value);
