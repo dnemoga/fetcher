@@ -9,9 +9,5 @@ export default {
     '^(.*)\\.js$': '$1'
   },
 
-  collectCoverage: true,
-
-  coverageReporters: [
-    'lcov'
-  ]
+  collectCoverage: true
 } as Config;

@@ -23,19 +23,19 @@ export function toPayload(data: Required<RequestOptions>['data']): Pick<RequestI
 
   return {
     headers: {
-      'Content-Type': 'application/json;charset=UTF-8'
+      'Content-Type': 'application/json; charset=utf-8'
     },
 
     body: JSON.stringify(data)
   };
 }
 
-export function toUrl(baseUrl: string, params: Required<RequestOptions>['params']): string {
+export function toUrl(baseUrl: string, params: Required<RequestOptions>['params'] = {}): string {
   const url = new URL(baseUrl, location.origin);
 
   Object.entries(params).forEach(([name, value]) => {
     url.searchParams.append(name, value);
   });
 
-  return String(url);
+  return url.toString();
 }

@@ -3,7 +3,7 @@
 [![](https://img.shields.io/github/actions/workflow/status/dnemoga/fetcher/quality-gate.yml?label=Quality%20Gate&style=flat-square)](https://github.com/dnemoga/fetcher/actions/workflows/quality-gate.yml)
 [![](https://img.shields.io/codecov/c/github/dnemoga/fetcher?label=Code%20Coverage&style=flat-square)](https://app.codecov.io/gh/dnemoga/fetcher)
 
-A minimalistic library built around the native [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) with zero dependencies. Intended to use only in modern web browsers.
+A minimalistic library built around the native [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) with zero dependencies.
 
 ## Getting Started
 ### Installation
@@ -11,13 +11,14 @@ A minimalistic library built around the native [Fetch API](https://developer.moz
 npm install @dnemoga/fetcher
 ```
 
-### Creating Instance
+### Importing
 ```ts
 import { Fetcher } from '@dnemoga/fetcher';
+```
 
-const fetcher = new Fetcher({
-  // Options
-});
+### Creating Instance
+```ts
+const fetcher = new Fetcher({ /* Fetcher Options */ });
 ```
 
 #### Fetcher Options
@@ -30,15 +31,8 @@ These options apply to every request outcoming from the current instance.
 
 ### Making Request
 ```ts
-const getResource = async () => {
-  const response = await fetcher.get('/resource', {
-    // Options
-  });
-
-  console.log(response);
-};
-
-getResource();
+fetcher.get('/resource', { /* Request Options */ })
+  .then(console.log, console.error);
 ```
 
 | Note: Supported methods are `get`, `head`, `post`, `put`, `patch`, and `delete`.
@@ -60,46 +54,44 @@ getResource();
   The `keepalive` option can be used to allow the request to outlive the page. Fetch with the `keepalive` flag is a replacement for the [`Navigator.sendBeacon()`](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/sendBeacon) API.
 
   - `signal`\
-  An [`AbortSignal`](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal) object instance; allows you to communicate with a fetch request and abort it if desired via an [`AbortController`](https://developer.mozilla.org/en-US/docs/Web/API/AbortController).
+  An [`AbortSignal`](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal) object instance; allows you to communicate with a fetch request and abort it if required via an [`AbortController`](https://developer.mozilla.org/en-US/docs/Web/API/AbortController).
 
 ## Next Steps
 ### Interceptors
+#### `onRequest.use()`
 ```ts
-const setCustomHeaders = async (request) => {
+const customHeaders = async (request) => {
   request.headers.set('X-Foo', 'Foo');
   request.headers.set('X-Bar', 'Bar');
 
   return request;
 };
 
-fetcher.onRequest.use(setCustomHeaders);
+fetcher.onRequest.use(customHeaders);
 ```
 
-Also, you're able to remove the existing interceptor when needed.
+#### `onRequest.eject()`
 ```ts
-fetcher.onRequest.eject(setCustomHeaders);
+fetcher.onRequest.eject(customHeaders);
 ```
 
-| Note: Interceptors are called in the order they were added.
-
-### Error Handling
+#### `onResponse.use()`
 ```ts
-fetcher.onResponse.use(async (response) => {
+const errorHandler = async (response) => {
   if (!response.ok) {
     throw new Error(response.statusText);
   }
 
   return response;
-});
+};
 
-try {
-  await fetcher.get('/status/400');
-} catch (error) {
-  console.error(error);
-}
+fetcher.onResponse.use(errorHandler);
 ```
 
-| Source: [Checking that the fetch was successful](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch#checking_that_the_fetch_was_successful)
+#### `onResponse.eject()`
+```ts
+fetcher.onResponse.eject(errorHandler);
+```
 
 ### Request Timeout
 ```ts
@@ -107,5 +99,3 @@ fetcher.get('/resource', {
   signal: AbortSignal.timeout(30000)
 });
 ```
-
-| Source: [`AbortSignal.timeout()`](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal/timeout)

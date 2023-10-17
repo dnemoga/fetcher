@@ -18,10 +18,10 @@ describe('isReadableStream(value)', () => {
     const value = new ReadableStream();
 
     // Subject
-    const result = isReadableStream(value);
+    const returnValue = isReadableStream(value);
 
     it('returns `true`', () => {
-      expect(result).toBe(true);
+      expect(returnValue).toBe(true);
     });
   });
 });
@@ -32,10 +32,10 @@ describe('isBlob(value)', () => {
     const value = new Blob();
 
     // Subject
-    const result = isBlob(value);
+    const returnValue = isBlob(value);
 
     it('returns `true`', () => {
-      expect(result).toBe(true);
+      expect(returnValue).toBe(true);
     });
   });
 });
@@ -46,10 +46,10 @@ describe('isBufferSource(value)', () => {
     const value = new DataView(new ArrayBuffer(0));
 
     // Subject
-    const result = isBufferSource(value);
+    const returnValue = isBufferSource(value);
 
     it('returns `true`', () => {
-      expect(result).toBe(true);
+      expect(returnValue).toBe(true);
     });
   });
 
@@ -58,10 +58,10 @@ describe('isBufferSource(value)', () => {
     const value = new ArrayBuffer(0);
 
     // Subject
-    const result = isBufferSource(value);
+    const returnValue = isBufferSource(value);
 
     it('returns `true`', () => {
-      expect(result).toBe(true);
+      expect(returnValue).toBe(true);
     });
   });
 });
@@ -72,10 +72,10 @@ describe('isFormData(value)', () => {
     const value = new FormData();
 
     // Subject
-    const result = isFormData(value);
+    const returnValue = isFormData(value);
 
     it('returns `true`', () => {
-      expect(result).toBe(true);
+      expect(returnValue).toBe(true);
     });
   });
 });
@@ -86,10 +86,10 @@ describe('isURLSearchParams(value)', () => {
     const value = new URLSearchParams();
 
     // Subject
-    const result = isURLSearchParams(value);
+    const returnValue = isURLSearchParams(value);
 
     it('returns `true`', () => {
-      expect(result).toBe(true);
+      expect(returnValue).toBe(true);
     });
   });
 });
@@ -100,10 +100,10 @@ describe('isString(value)', () => {
     const value = 'text';
 
     // Subject
-    const result = isString(value);
+    const returnValue = isString(value);
 
     it('returns `true`', () => {
-      expect(result).toBe(true);
+      expect(returnValue).toBe(true);
     });
   });
 });
@@ -114,10 +114,10 @@ describe('isNull(value)', () => {
     const value = null;
 
     // Subject
-    const result = isNull(value);
+    const returnValue = isNull(value);
 
     it('returns `true`', () => {
-      expect(result).toBe(true);
+      expect(returnValue).toBe(true);
     });
   });
 });
@@ -128,10 +128,10 @@ describe('isUndefined(value)', () => {
     const value = undefined;
 
     // Subject
-    const result = isUndefined(value);
+    const returnValue = isUndefined(value);
 
     it('returns `true`', () => {
-      expect(result).toBe(true);
+      expect(returnValue).toBe(true);
     });
   });
 });

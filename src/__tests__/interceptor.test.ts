@@ -4,95 +4,109 @@ import { Interceptor } from '../interceptor.js';
 import 'environment';
 
 describe('Interceptor()', () => {
-  const interceptor = new Interceptor<number[]>();
+  // Subject
+  const interceptor = new Interceptor<string>();
 
   describe('.handlers', () => {
-    it('is an instance of Set', () => {
-      expect(interceptor.handlers).toBeInstanceOf(Set);
+    it('is an array of handlers', () => {
+      expect(interceptor.handlers).toBeInstanceOf(Array);
     });
   });
 
   describe('.use(handler)', () => {
     // Parameters
-    const clone = jest.fn<Promise<number[]>, [value: number[]]>(
-      (value) => Promise.resolve([...value])
+    const identity = jest.fn<Promise<string>, [value: string]>(
+      (value) => Promise.resolve(value)
     );
 
-    // Subject
+    // Action
     beforeAll(() => {
-      interceptor.use(clone);
+      interceptor.use(identity);
     });
 
-    // Cleanup
+    // Teardown
     afterAll(() => {
-      interceptor.eject(clone);
+      interceptor.eject(identity);
     });
 
     it('adds `handler` to the interceptor', () => {
-      expect(interceptor.handlers).toContain(clone);
+      expect(interceptor.handlers).toContain(identity);
     });
   });
 
   describe('.eject(handler)', () => {
     // Parameters
-    const clone = jest.fn<Promise<number[]>, [value: number[]]>(
-      (value) => Promise.resolve([...value])
+    const identity = jest.fn<Promise<string>, [value: string]>(
+      (value) => Promise.resolve(value)
     );
 
     // Setup
     beforeAll(() => {
-      interceptor.use(clone);
+      interceptor.use(identity);
     });
 
-    // Subject
+    // Action
     beforeAll(() => {
-      interceptor.eject(clone);
+      interceptor.eject(identity);
     });
 
     it('removes `handler` from the interceptor', () => {
-      expect(interceptor.handlers).not.toContain(clone);
+      expect(interceptor.handlers).not.toContain(identity);
     });
   });
 
   describe('.intercept(value)', () => {
     // Parameters
-    const sort = jest.fn<Promise<number[]>, [value: number[]]>(
-      (value) => Promise.resolve([...value].sort())
+    const addBar = jest.fn<Promise<string>, [value: string]>(
+      (value) => Promise.resolve(`${value}, bar`)
     );
 
-    const reverse = jest.fn<Promise<number[]>, [value: number[]]>(
-      (value) => Promise.resolve([...value].reverse())
+    const addBaz = jest.fn<Promise<string>, [value: string]>(
+      (value) => Promise.resolve(`${value}, baz`)
     );
+
+    const addQux = jest.fn<Promise<string>, [value: string]>(
+      (value) => Promise.resolve(`${value}, qux`)
+    );
+
+    // Subject
+    let returnValue: string;
 
     // Setup
     beforeAll(() => {
-      interceptor.use(sort);
-      interceptor.use(reverse);
+      interceptor.use(addBar);
+      interceptor.use(addBaz);
+      interceptor.use(addQux);
     });
 
-    // Subject
-    let result: number[];
-
+    // Action
     beforeAll(async () => {
-      result = await interceptor.intercept([1, 4, 2, 5, 3]);
+      returnValue = await interceptor.intercept('foo');
     });
 
-    // Cleanup
+    // Teardown
     afterAll(() => {
-      interceptor.eject(sort);
-      interceptor.eject(reverse);
+      interceptor.eject(addBar);
+      interceptor.eject(addBaz);
+      interceptor.eject(addQux);
     });
 
-    it('sequentially calls all handlers', () => {
-      expect(sort).toBeCalledTimes(1);
-      expect(reverse).toBeCalledTimes(1);
+    it('builds a pipeline and sequentially calls all handlers', async () => {
+      expect(addBar.mock.invocationCallOrder[0]).toBe(1);
+      expect(addBar.mock.calls[0][0]).toBe('foo');
+      expect(await addBar.mock.results[0].value).toBe('foo, bar');
 
-      expect(sort.mock.invocationCallOrder[0]).toBe(1);
-      expect(reverse.mock.invocationCallOrder[0]).toBe(2);
+      expect(addBaz.mock.invocationCallOrder[0]).toBe(2);
+      expect(addBaz.mock.calls[0][0]).toBe('foo, bar');
+      expect(await addBaz.mock.results[0].value).toBe('foo, bar, baz');
+
+      expect(addQux.mock.invocationCallOrder[0]).toBe(3);
+      expect(addQux.mock.calls[0][0]).toBe('foo, bar, baz');
+      expect(await addQux.mock.results[0].value).toBe('foo, bar, baz, qux');
     });
 
-    it('returns a result of calling handlers', () => {
-      expect(result).toStrictEqual([5, 4, 3, 2, 1]);
+    it('returns the final result of calling handlers', () => {
+      expect(returnValue).toBe('foo, bar, baz, qux');
     });
   });
 });
