@@ -71,7 +71,7 @@ export class Fetcher {
   async request(method: string, baseUrl: string, options?: RequestOptions): Promise<Response> {
     const payload = toPayload(options?.data);
 
-    // TODO: Replace this chain with the pipe operator when it's ready
+    // TODO: Replace this chain with the pipe operator once it's ready
     return this.onResponse.intercept(
       await fetch(
         await this.onRequest.intercept(

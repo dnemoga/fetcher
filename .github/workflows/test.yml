@@ -1,0 +1,60 @@
+name: Test
+run-name: ${{ github.workflow }}
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  security-events: write
+
+jobs:
+  run-unit-tests:
+    name: Run Unit Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          cache: npm
+          cache-dependency-path: package-lock.json
+      - run: npm ci
+      - run: npm run test
+      - uses: codecov/codecov-action@v5
+        with:
+          files: coverage/lcov.info
+
+  run-static-code-analysis:
+    name: Run Static Code Analysis
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          cache: npm
+          cache-dependency-path: package-lock.json
+      - run: npm ci
+      - run: npm i @microsoft/eslint-formatter-sarif
+      - run: npm run lint --
+          --format @microsoft/eslint-formatter-sarif
+          --output-file lint.sarif
+        continue-on-error: true
+      - uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: lint.sarif
+          wait-for-processing: true
+
+  run-semantic-code-analysis:
+    name: Run Semantic Code Analysis
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: github/codeql-action/init@v3
+        with:
+          languages: typescript
+          queries: security-and-quality
+      - uses: github/codeql-action/analyze@v3
